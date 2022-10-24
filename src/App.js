@@ -1,8 +1,9 @@
-import {useState, React} from 'react'
+import {useState, useEffect, React} from 'react'
 import './App.css';
 
 function App() {
   const [count, setCount] = useState(0)
+  const [userData, setUserData] = useState([])
 
   const increment = () => {
     setCount(count + 1)
@@ -11,6 +12,17 @@ function App() {
   const decrement = () => {
     setCount(count - 1)
   }
+
+  const endpoint = 'https://randomuser.me/api'
+
+  const getData = async () => {
+    const response = await fetch(endpoint)
+    const data = await response.json()
+    setUserData(data)
+  }
+
+  
+  console.log(userData)
 
   return (
     <div className="App">
