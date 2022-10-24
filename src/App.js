@@ -17,12 +17,17 @@ function App() {
 
   const getData = async () => {
     const response = await fetch(endpoint)
-    const data = await response.json()
-    setUserData(data)
+    let data = await response.json()
+    //this returns an object, so if I want to show it on screen, turn it into a string with JSON stringify
+    return JSON.stringify(data)
   }
 
-  
-  console.log(userData)
+
+  useEffect(() => {
+    getData().then((response) => {
+      setUserData(response)
+    })
+  }, [])
 
   return (
     <div className="App">
@@ -31,6 +36,9 @@ function App() {
       <p>Count: {count}</p>
       <button onClick={increment}>+1</button>
       <button onClick={decrement}>-1</button>
+      <h2>User data</h2>
+      <p>{userData}</p>
+      
     </div>
   );
 }
