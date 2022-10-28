@@ -2,53 +2,55 @@ import { useState, useEffect, React } from "react";
 import "./App.css";
 
 function App() {
-
-  const [randomUser, setRandomUser] = useState('')
-  const [users, setUsers] = useState([])
-  let [userCount, setUserCount] = useState(0)
+  const [randomUser, setRandomUser] = useState("");
+  const [users, setUsers] = useState([]);
+  let [userCount, setUserCount] = useState(0);
 
   const endpoint = "https://randomuser.me/api";
 
   useEffect(() => {
     const getRandomUser = async () => {
-      const response = await fetch(endpoint)
-      console.log(response)
-      const data = await response.json()
-      console.log(data.results)
-      setRandomUser(data.results)
-    }
+      const response = await fetch(endpoint);
+      console.log(response);
+      const data = await response.json();
+      console.log(data.results[0]);
+      setRandomUser(data.results[0]);
+    };
 
-    getRandomUser()
-  }, [userCount])
-  
+    getRandomUser();
+  }, [userCount]);
 
   const getNewUser = () => {
-    setUsers([...users, randomUser])
-    setUserCount(userCount += 1)
-  }
+    setUsers([...users, randomUser]);
+    setUserCount((userCount += 1));
+  };
 
   const getRandomUserName = () => {
-    return `${randomUser[0].name.first} ${randomUser[0].name.last}`
-  }
+    return `${randomUser.name.first} ${randomUser.name.last}`;
+  };
 
   const getRandomUserImg = () => {
-    return `${randomUser[0].picture.thumbnail}`
-  }
-
+    return `${randomUser.picture.thumbnail}`;
+  };
+  console.log(users);
   return (
     <div className="App">
       <h1>Random User</h1>
-      <p>{JSON.stringify(randomUser)}</p>
       <p>{randomUser && getRandomUserName()}</p>
-      <img src={randomUser && getRandomUserImg()}/>
+      <img src={randomUser && getRandomUserImg()} />
       <br />
       <button onClick={getNewUser}>Get New User</button>
       <h1>Users</h1>
-      <ul>
-        {users.map((user, index) => {
-          <li key={index}></li>
+      <div>
+        {users.map((user) => {
+          return (
+            <>
+            <p>{user.name.first} {user.name.last}</p>
+            <img src={user.picture.thumbnail}/>
+            </>
+          )
         })}
-      </ul>
+      </div>
     </div>
   );
 }
