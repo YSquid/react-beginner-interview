@@ -27,18 +27,28 @@ function App() {
     setUserCount(userCount += 1)
   }
 
-  
+  const getRandomUserName = () => {
+    return `${randomUser[0].name.first} ${randomUser[0].name.last}`
+  }
+
+  const getRandomUserImg = () => {
+    return `${randomUser[0].picture.thumbnail}`
+  }
 
   return (
     <div className="App">
       <h1>Random User</h1>
       <p>{JSON.stringify(randomUser)}</p>
-      <p>{`${randomUser[0].name.first} ${randomUser[0].name.last}`}</p>
-      <img src={`${randomUser[0].picture.thumbnail}`}/>
+      <p>{randomUser && getRandomUserName()}</p>
+      <img src={randomUser && getRandomUserImg()}/>
       <br />
       <button onClick={getNewUser}>Get New User</button>
       <h1>Users</h1>
-      <p>{JSON.stringify(users)}</p>
+      <ul>
+        {users.map((user, index) => {
+          <li key={index}></li>
+        })}
+      </ul>
     </div>
   );
 }
