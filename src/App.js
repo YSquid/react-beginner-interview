@@ -5,7 +5,7 @@ function App() {
 
   const [randomUser, setRandomUser] = useState('')
   const [users, setUsers] = useState([])
-  const [userCount, setUserCount] = useState(0)
+  let [userCount, setUserCount] = useState(0)
 
   const endpoint = "https://randomuser.me/api";
 
@@ -19,24 +19,26 @@ function App() {
     }
 
     getRandomUser()
-  }, [])
+  }, [userCount])
   
 
-  const saveUser = () => {
+  const getNewUser = () => {
     setUsers([...users, randomUser])
+    setUserCount(userCount += 1)
   }
 
-  // const getRandomUserFullName = () => {
-  //   return `First: ${randomUser[0].name.first} Last: ${randomUser[0].name.first}`
-  // }
   
 
   return (
     <div className="App">
       <h1>Random User</h1>
       <p>{JSON.stringify(randomUser)}</p>
-      {/* <p>{getRandomUserFullName()}</p> */}
-      <button onClick={saveUser}>Save Random User</button>
+      <p>{`${randomUser[0].name.first} ${randomUser[0].name.last}`}</p>
+      <img src={`${randomUser[0].picture.thumbnail}`}/>
+      <br />
+      <button onClick={getNewUser}>Get New User</button>
+      <h1>Users</h1>
+      <p>{JSON.stringify(users)}</p>
     </div>
   );
 }
