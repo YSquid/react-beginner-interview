@@ -1,21 +1,14 @@
 import { useState, useEffect, React } from "react";
 import "./App.css";
+import getRandomUser from "./getRandomUser";
 
 function App() {
   const [randomUser, setRandomUser] = useState("");
   const [users, setUsers] = useState([]);
   let [userCount, setUserCount] = useState(0);
 
-  const endpoint = "https://randomuser.me/api";
-  const getRandomUser = async () => {
-    const response = await fetch(endpoint);
-    const data = await response.json();
-    setRandomUser(data.results[0]);
-  };
-
-
   useEffect(() => {
-    getRandomUser();
+    async () =>{console.log(getRandomUser())};
   }, [userCount]);
 
   const getNewUser = () => {
