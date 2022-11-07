@@ -11,9 +11,7 @@ function App() {
   useEffect(() => {
     const getRandomUser = async () => {
       const response = await fetch(endpoint);
-      console.log(response);
       const data = await response.json();
-      console.log(data.results[0]);
       setRandomUser(data.results[0]);
     };
 
