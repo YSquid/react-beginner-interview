@@ -9,7 +9,7 @@ function RandomUser() {
     const data = await response.json();
     setRandomUser(data.results[0]);
   };
-  
+
   useEffect(() => {
     getRandomUser();
   }, []);
@@ -20,6 +20,8 @@ function RandomUser() {
         {randomUser ? `${randomUser.name.first} ${randomUser.name.last}` : null}
       </p>
       <img src={randomUser ? randomUser.picture.thumbnail : null} />
+      <br/>
+      <button onClick={getRandomUser}>Get New User</button>
     </>
   );
 }
