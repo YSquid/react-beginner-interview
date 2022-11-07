@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function RandomUser() {
-  const [randomUser, setRandomUser] = useState("");
+function RandomUser({randomUser, setRandomUser}) {
   
   const getRandomUser = async () => {
     const endpoint = "https://randomuser.me/api";
