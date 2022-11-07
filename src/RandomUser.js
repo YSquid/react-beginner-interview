@@ -20,6 +20,7 @@ function RandomUser({randomUser, setRandomUser}) {
       </p>
       <img src={randomUser ? randomUser.picture.thumbnail : null} />
       <br/>
+      {/*Maybe if I move this button to the users component then I can on click save the random users to users state and fetch new? */}
       <button onClick={getRandomUser}>Get New User</button>
     </>
   );
